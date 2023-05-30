@@ -31,12 +31,13 @@ slider.addEventListener("input", (event) => {
 downloadBtn.addEventListener("click", async () => {
   const { url } = await getCurrentTab();
   const currentUrl = url;
-
+  const filename = new URL(url).hostname.replaceAll(".", "-");
   const canvas = document.createElement("canvas");
+  const scale = slider.value;
 
   const options = {
     margin: 1,
-    scale: slider.value,
+    scale: scale,
     color: { dark: "#2b2a2a", light: "#ffffff" },
   };
   qr.toCanvas(canvas, currentUrl, options);
@@ -46,6 +47,6 @@ downloadBtn.addEventListener("click", async () => {
 
   image.src = canvas.toDataURL("image/png");
   link.href = image.src;
-  link.download = "image.png";
+  link.download = `${filename}_scale-${scale}.png`;
   link.click();
 });
