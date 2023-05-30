@@ -39,14 +39,13 @@ async function getCurrentTab() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const { url } = await getCurrentTab();
-  const currentUrl = url;
   const canvas = document.getElementById("canvas");
   const options = {
     margin: 1,
     scale: 7,
     color: { dark: "#2b2a2a", light: "#ffffff" },
   };
-  qr.toCanvas(canvas, currentUrl, options);
+  qr.toCanvas(canvas, url, options);
 });
 
 slider.addEventListener("input", (event) => {
@@ -61,7 +60,6 @@ errorLevel.addEventListener("input", async (event) => {
   errorLevelValue.innerHTML = ERROR_CORR_LEVELS[nearest].fullName;
 
   const { url } = await getCurrentTab();
-  const currentUrl = url;
   const canvas = document.getElementById("canvas");
   const options = {
     margin: 1,
@@ -69,12 +67,11 @@ errorLevel.addEventListener("input", async (event) => {
     errorCorrectionLevel: errorCorrectionLevel.name,
     color: { dark: "#2b2a2a", light: "#ffffff" },
   };
-  qr.toCanvas(canvas, currentUrl, options);
+  qr.toCanvas(canvas, url, options);
 });
 
 downloadBtn.addEventListener("click", async () => {
   const { url } = await getCurrentTab();
-  const currentUrl = url;
   const filename = new URL(url).hostname.replaceAll(".", "-");
   const canvas = document.createElement("canvas");
   const scale = slider.value;
@@ -87,7 +84,7 @@ downloadBtn.addEventListener("click", async () => {
     errorCorrectionLevel: errorCorrectionLevel.name,
     color: { dark: "#2b2a2a", light: "#ffffff" },
   };
-  qr.toCanvas(canvas, currentUrl, options);
+  qr.toCanvas(canvas, url, options);
 
   const link = document.createElement("a");
   const image = new Image();
