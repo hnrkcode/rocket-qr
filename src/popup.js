@@ -18,7 +18,7 @@ sliderValue.innerHTML = slider.value;
 
 function getNearestErrorLevel() {
   const value = parseInt(errorLevel.value);
-  const values = [7, 15, 25, 30];
+  const values = Object.keys(ERROR_CORR_LEVELS);
   const nearest = values.reduce(function (prev, curr) {
     return Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev;
   });
@@ -38,6 +38,15 @@ async function getCurrentTab() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  const datalist = document.getElementById("values");
+
+  for (let key in ERROR_CORR_LEVELS) {
+    const option = document.createElement("option");
+    option.value = key;
+    option.label = ERROR_CORR_LEVELS[key].name;
+    datalist.appendChild(option);
+  }
+
   const { url } = await getCurrentTab();
   const canvas = document.getElementById("canvas");
   const options = {
