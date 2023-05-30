@@ -18,4 +18,4 @@ package-extension:
 	make clean
 	make install
 	make build
-	zip -r "output/$$(jq -r '.name' manifest.json)-$$(jq -r '.version' manifest.json).zip" dist/
+	zip -r "output/$$(jq -r '.name' package.json)-$$(jq -r '.version' manifest.json).zip" dist/
