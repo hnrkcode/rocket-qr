@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "rocket-qr",
+  "description": "Lightning-fast URL QR Code Generator",
+  "version": "1.0.0",
+  "permissions": ["activeTab"],
+  "action": {
+    "default_popup": "src/popup.html"
+  }
+}

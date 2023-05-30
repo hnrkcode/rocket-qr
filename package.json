@@ -1,0 +1,15 @@
+{
+  "name": "rocket-qr",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "parcel build ./manifest.json --config @parcel/config-webextension"
+  },
+  "devDependencies": {
+    "@parcel/config-webextension": "^2.8.3",
+    "parcel": "^2.8.3",
+    "prettier": "2.8.8"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.3"
+  }
+}
