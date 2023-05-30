@@ -9,6 +9,16 @@ const sliderValue = document.getElementById("current-scale");
 errorLevelValue.innerHTML = `~${errorLevel.value} %`;
 sliderValue.innerHTML = slider.value;
 
+function getNearestErrorLevel() {
+  const value = parseInt(errorLevel.value);
+  const values = [7, 15, 25, 30];
+  const nearest = values.reduce(function (prev, curr) {
+    return Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev;
+  });
+
+  return nearest;
+}
+
 function getErrorCorrectionLevel(level) {
   const errorCorrectionLevels = {
     7: "L",
@@ -44,11 +54,7 @@ slider.addEventListener("input", (event) => {
 });
 
 errorLevel.addEventListener("input", async (event) => {
-  const value = parseInt(event.target.value);
-  const values = [7, 15, 25, 30];
-  const nearest = values.reduce(function (prev, curr) {
-    return Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev;
-  });
+  const nearest = getNearestErrorLevel();
 
   errorLevel.value = nearest;
   errorLevelValue.innerHTML = `~${nearest} %`;
@@ -71,10 +77,12 @@ downloadBtn.addEventListener("click", async () => {
   const filename = new URL(url).hostname.replaceAll(".", "-");
   const canvas = document.createElement("canvas");
   const scale = slider.value;
+  const nearest = getNearestErrorLevel();
 
   const options = {
     margin: 1,
     scale: scale,
+    errorCorrectionLevel: getErrorCorrectionLevel(nearest),
     color: { dark: "#2b2a2a", light: "#ffffff" },
   };
   qr.toCanvas(canvas, currentUrl, options);
