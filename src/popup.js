@@ -1,9 +1,24 @@
 import qr from "qrcode";
 
 const downloadBtn = document.getElementById("download");
+const errorLevel = document.getElementById("level");
+const errorLevelValue = document.getElementById("current-level");
 const slider = document.getElementById("scale");
 const sliderValue = document.getElementById("current-scale");
+
+errorLevelValue.innerHTML = `~${errorLevel.value} %`;
 sliderValue.innerHTML = slider.value;
+
+function getErrorCorrectionLevel(level) {
+  const errorCorrectionLevels = {
+    7: "L",
+    15: "M",
+    25: "Q",
+    30: "H",
+  };
+
+  return errorCorrectionLevels[level];
+}
 
 async function getCurrentTab() {
   const queryOptions = { active: true, lastFocusedWindow: true };
@@ -26,6 +41,28 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 slider.addEventListener("input", (event) => {
   sliderValue.innerHTML = event.target.value;
+});
+
+errorLevel.addEventListener("input", async (event) => {
+  const value = parseInt(event.target.value);
+  const values = [7, 15, 25, 30];
+  const nearest = values.reduce(function (prev, curr) {
+    return Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev;
+  });
+
+  errorLevel.value = nearest;
+  errorLevelValue.innerHTML = `~${nearest} %`;
+
+  const { url } = await getCurrentTab();
+  const currentUrl = url;
+  const canvas = document.getElementById("canvas");
+  const options = {
+    margin: 1,
+    scale: 7,
+    errorCorrectionLevel: getErrorCorrectionLevel(nearest),
+    color: { dark: "#2b2a2a", light: "#ffffff" },
+  };
+  qr.toCanvas(canvas, currentUrl, options);
 });
 
 downloadBtn.addEventListener("click", async () => {
