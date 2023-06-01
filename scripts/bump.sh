@@ -42,3 +42,11 @@ jq --arg new_version "$new_version" '.version = $new_version' manifest.json > tm
 jq --arg new_version "$new_version" '.version = $new_version' package.json > tmp.json && mv tmp.json package.json
 
 npm install
+
+# Commit the changes
+git add manifest.json package.json package-lock.json
+git commit -m "Bump version to $new_version"
+
+# Tag the commit
+commit_hash=$(git rev-parse HEAD)
+git tag -a "v$new_version" $commit_hash -m "Version $new_version"
