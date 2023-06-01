@@ -9,7 +9,7 @@
     } from '../lib/utils';
     import { errorResistance } from '../lib/stores';
 
-    let { fullName } = getErrorCorrectionLevel($errorResistance);
+    let currentErrorResistance = ERROR_CORR_LEVELS[$errorResistance].fullName;
 
     async function rerenderQRCode(errorCorrectionLevel) {
         const { url } = await getCurrentTab();
@@ -25,9 +25,13 @@
 
     async function handleErrorResistance(event) {
         const nearest = getNearestErrorLevel(event.target.value);
-        let { name } = getErrorCorrectionLevel(nearest);
+        let { name, fullName } = getErrorCorrectionLevel(nearest);
         errorResistance.set(nearest);
         await rerenderQRCode(name);
+
+        if (fullName !== currentErrorResistance) {
+            currentErrorResistance = fullName;
+        }
     }
 
     onMount(() => {
@@ -44,7 +48,7 @@
 
 <div class="flex flex-col my-2">
     <label for="error-resistance" class="uppercase font-bold"
-        >Error resistance: <span />{fullName}</label
+        >Error resistance: <span />{currentErrorResistance}</label
     >
     <input
         type="range"
