@@ -1,4 +1,5 @@
 import qr from 'qrcode';
+import type { QRCodeRenderersOptions } from 'qrcode';
 
 interface ErrorCorrectionLevel {
   name: string;
@@ -36,7 +37,11 @@ export function getErrorCorrectionLevel(resistanceLevel: number): {
   return ERROR_CORR_LEVELS[resistanceLevel];
 }
 
-export function renderQR(canvas, url, options) {
+export function renderQR(
+  canvas: HTMLCanvasElement | HTMLElement | null,
+  url: string | undefined,
+  options: QRCodeRenderersOptions
+): void {
   if (url) {
     qr.toCanvas(canvas, url, options);
   } else {

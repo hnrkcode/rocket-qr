@@ -2,9 +2,10 @@
   import { onMount } from 'svelte';
   import { getCurrentTab, getErrorCorrectionLevel, renderQR } from '../utils';
   import { scale, errorResistance } from '../stores';
+  import type { QRCodeErrorCorrectionLevel } from 'qrcode';
 
-  let currentUrl = null;
-  let filename = null;
+  let currentUrl: string | undefined;
+  let filename: string;
 
   function downloadQrCode() {
     const canvas = document.createElement('canvas');
@@ -12,7 +13,7 @@
     const options = {
       margin: 1,
       scale: $scale,
-      errorCorrectionLevel: name,
+      errorCorrectionLevel: name as QRCodeErrorCorrectionLevel,
       color: { dark: '#2b2a2a', light: '#ffffff' }
     };
     renderQR(canvas, currentUrl, options);
@@ -29,7 +30,7 @@
   onMount(async () => {
     const { url } = await getCurrentTab();
     currentUrl = url;
-    filename = new URL(url).hostname.replaceAll('.', '-');
+    filename = new URL(String(url)).hostname.replaceAll('.', '-');
   });
 </script>
 
