@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { scale } from '../../stores';
+  import { scale } from '$lib/stores';
 </script>
 
 <div class="flex flex-col my-2">

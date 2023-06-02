@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { getCurrentTab, getErrorCorrectionLevel, renderQR } from '../../utils';
-  import { scale, errorResistance } from '../../stores';
+  import { getCurrentTab, getErrorCorrectionLevel, renderQR } from '$lib/utils';
+  import { scale, errorResistance } from '$lib/stores';
   import type { QRCodeErrorCorrectionLevel } from 'qrcode';
 
   let currentUrl: string | undefined;
