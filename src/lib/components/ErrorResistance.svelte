@@ -6,8 +6,8 @@
         getNearestErrorLevel,
         getErrorCorrectionLevel,
         getCurrentTab
-    } from '../lib/utils';
-    import { errorResistance } from '../lib/stores';
+    } from '../utils';
+    import { errorResistance } from '../stores';
 
     let currentErrorResistance = ERROR_CORR_LEVELS[$errorResistance].fullName;
 

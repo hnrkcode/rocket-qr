@@ -1,8 +1,8 @@
 <script lang="ts">
     import qr from 'qrcode';
     import { onMount } from 'svelte';
-    import { getCurrentTab, getErrorCorrectionLevel } from '../lib/utils';
-    import { scale, errorResistance } from '../lib/stores';
+    import { getCurrentTab, getErrorCorrectionLevel } from '../utils';
+    import { scale, errorResistance } from '../stores';
 
     let currentUrl = null;
     let filename = null;

@@ -1,5 +1,7 @@
+.PHONY: build install bump clean zip
+
 install:
-	npm ci
+	npm install
 
 build:
 	npm run build
@@ -9,17 +11,11 @@ bump:
 	./scripts/bump.sh $$version_bump
 
 clean:
-	rm -rf dist/ node_modules/ output/
+	rm -rf build/ node_modules/ chrome-extension/ .svelte-kit/
 
-prettier-check:
-	npx prettier --check .
-
-prettier-format:
-	npx prettier --write .
-
-package-extension:
+zip:
 	make clean
 	make install
 	make build
-	mkdir -p output
-	zip -r "output/$$(jq -r '.name' package.json)-$$(jq -r '.version' manifest.json).zip" dist/
+	mkdir -p chrome-extension
+	zip -r "chrome-extension/$$(jq -r '.name' package.json)-$$(jq -r '.version' ./static/manifest.json).zip" build

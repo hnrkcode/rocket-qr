@@ -1,7 +1,7 @@
 <script lang="ts">
     import qr from 'qrcode';
     import { onMount } from 'svelte';
-    import { getCurrentTab } from '../lib/utils';
+    import { getCurrentTab } from '../utils'
 
     onMount(async () => {
         const { url } = await getCurrentTab();
