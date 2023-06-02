@@ -1,7 +1,6 @@
 <script lang="ts">
-    import qr from 'qrcode';
     import { onMount } from 'svelte';
-    import { getCurrentTab } from '../utils'
+    import { getCurrentTab, renderQR } from '../utils'
 
     onMount(async () => {
         const { url } = await getCurrentTab();
@@ -11,7 +10,7 @@
             scale: 7,
             color: { dark: '#2b2a2a', light: '#ffffff' }
         };
-        qr.toCanvas(canvas, url, options);
+        renderQR(canvas, url, options);
     });
 </script>
 

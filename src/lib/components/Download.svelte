@@ -1,7 +1,6 @@
 <script lang="ts">
-    import qr from 'qrcode';
     import { onMount } from 'svelte';
-    import { getCurrentTab, getErrorCorrectionLevel } from '../utils';
+    import { getCurrentTab, getErrorCorrectionLevel, renderQR } from '../utils';
     import { scale, errorResistance } from '../stores';
 
     let currentUrl = null;
@@ -16,7 +15,7 @@
             errorCorrectionLevel: name,
             color: { dark: '#2b2a2a', light: '#ffffff' }
         };
-        qr.toCanvas(canvas, currentUrl, options);
+        renderQR(canvas, currentUrl, options);
 
         const link = document.createElement('a');
         const image = new Image();

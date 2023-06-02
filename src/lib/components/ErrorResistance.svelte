@@ -1,11 +1,11 @@
 <script lang="ts">
-    import qr from 'qrcode';
     import { onMount } from 'svelte';
     import {
         ERROR_CORR_LEVELS,
         getNearestErrorLevel,
         getErrorCorrectionLevel,
-        getCurrentTab
+        getCurrentTab,
+        renderQR
     } from '../utils';
     import { errorResistance } from '../stores';
 
@@ -20,7 +20,7 @@
             errorCorrectionLevel: errorCorrectionLevel,
             color: { dark: '#2b2a2a', light: '#ffffff' }
         };
-        qr.toCanvas(canvas, url, options);
+        renderQR(canvas, url, options);
     }
 
     async function handleErrorResistance(event) {

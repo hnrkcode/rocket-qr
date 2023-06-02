@@ -1,3 +1,5 @@
+import qr from 'qrcode';
+
 interface ErrorCorrectionLevel {
   name: string;
   fullName: string;
@@ -32,4 +34,12 @@ export function getErrorCorrectionLevel(resistanceLevel: number): {
   fullName: string;
 } {
   return ERROR_CORR_LEVELS[resistanceLevel];
+}
+
+export function renderQR(canvas, url, options) {
+  if (url) {
+    qr.toCanvas(canvas, url, options);
+  } else {
+    console.error('URL is undefined');
+  }
 }
