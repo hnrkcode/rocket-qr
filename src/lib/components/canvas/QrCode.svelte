@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { getCurrentTab, renderQR } from '../utils';
+  import { getCurrentTab, renderQR } from '../../utils';
 
   onMount(async () => {
     const { url } = await getCurrentTab();

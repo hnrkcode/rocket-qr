@@ -6,8 +6,8 @@
     getErrorCorrectionLevel,
     getCurrentTab,
     renderQR
-  } from '../utils';
-  import { errorResistance } from '../stores';
+  } from '../../utils';
+  import { errorResistance } from '../../stores';
   import type { QRCodeErrorCorrectionLevel } from 'qrcode';
 
   let currentErrorResistance = ERROR_CORR_LEVELS[$errorResistance].fullName;
