@@ -1,8 +1,13 @@
-export const ERROR_CORR_LEVELS = {
-  7: { name: "L", fullName: "Low" },
-  15: { name: "M", fullName: "Medium" },
-  25: { name: "Q", fullName: "Quartile" },
-  30: { name: "H", fullName: "High" },
+interface ErrorCorrectionLevel {
+  name: string;
+  fullName: string;
+}
+
+export const ERROR_CORR_LEVELS: Record<number, ErrorCorrectionLevel> = {
+  7: { name: 'L', fullName: 'Low' },
+  15: { name: 'M', fullName: 'Medium' },
+  25: { name: 'Q', fullName: 'Quartile' },
+  30: { name: 'H', fullName: 'High' }
 };
 
 export async function getCurrentTab() {
@@ -16,10 +21,7 @@ export function getNearestErrorLevel(resistanceLevel: number): number {
   const nearest = values.reduce(function (prev: string, curr: string) {
     const prevNum = Number(prev);
     const currNum = Number(curr);
-    return Math.abs(currNum - resistanceLevel) <
-      Math.abs(prevNum - resistanceLevel)
-      ? curr
-      : prev;
+    return Math.abs(currNum - resistanceLevel) < Math.abs(prevNum - resistanceLevel) ? curr : prev;
   });
 
   return Number(nearest);
