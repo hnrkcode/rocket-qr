@@ -29,7 +29,7 @@
     const inputElement = inputEvent.target as HTMLInputElement | null;
 
     if (inputElement) {
-      const inputValue = parseInt(inputElement.value, 15);
+      const inputValue = parseInt(inputElement.value);
       const nearest = getNearestErrorLevel(inputValue);
       let { name, fullName } = getErrorCorrectionLevel(nearest);
       errorResistance.set(nearest);
