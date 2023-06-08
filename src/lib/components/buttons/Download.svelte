@@ -3,7 +3,7 @@
   import { getCurrentTab, getErrorCorrectionLevel, renderQR } from '$lib/utils';
   import { scale, errorResistance } from '$lib/stores';
   import type { QRCodeErrorCorrectionLevel } from 'qrcode';
-  import { foregroundColor, backgroundColor } from '$lib/stores';
+  import { foregroundColor, backgroundColor, quietZone } from '$lib/stores';
 
   let currentUrl: string | undefined;
   let filename: string;
@@ -12,7 +12,7 @@
     const canvas = document.createElement('canvas');
     const { name, fullName } = getErrorCorrectionLevel($errorResistance);
     const options = {
-      margin: 1,
+      margin: $quietZone,
       scale: $scale,
       errorCorrectionLevel: name as QRCodeErrorCorrectionLevel,
       color: { dark: $foregroundColor, light: $backgroundColor }

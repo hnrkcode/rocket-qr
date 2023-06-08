@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount, beforeUpdate } from 'svelte';
   import { getCurrentTab, renderQR } from '$lib/utils';
-  import { foregroundColor, backgroundColor } from '$lib/stores';
+  import { foregroundColor, backgroundColor, quietZone } from '$lib/stores';
 
   async function handleRenderQR() {
     const { url } = await getCurrentTab();
     const canvas = document.getElementById('canvas');
     const options = {
-      margin: 0,
+      margin: $quietZone,
       scale: 7,
       color: { dark: $foregroundColor, light: $backgroundColor }
     };

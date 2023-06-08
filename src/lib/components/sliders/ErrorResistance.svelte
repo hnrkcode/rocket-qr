@@ -7,7 +7,7 @@
     getCurrentTab,
     renderQR
   } from '$lib/utils';
-  import { errorResistance, foregroundColor, backgroundColor } from '$lib/stores';
+  import { errorResistance, foregroundColor, backgroundColor, quietZone } from '$lib/stores';
   import type { QRCodeErrorCorrectionLevel } from 'qrcode';
 
   let currentErrorResistance = ERROR_CORR_LEVELS[$errorResistance].fullName;
@@ -16,7 +16,7 @@
     const { url } = await getCurrentTab();
     const canvas = document.getElementById('canvas');
     const options = {
-      margin: 0,
+      margin: $quietZone,
       scale: 7,
       errorCorrectionLevel: errorCorrectionLevel as QRCodeErrorCorrectionLevel,
       color: { dark: $foregroundColor, light: $backgroundColor }
