@@ -7,7 +7,7 @@
     getCurrentTab,
     renderQR
   } from '$lib/utils';
-  import { errorResistance } from '$lib/stores';
+  import { errorResistance, foregroundColor, backgroundColor } from '$lib/stores';
   import type { QRCodeErrorCorrectionLevel } from 'qrcode';
 
   let currentErrorResistance = ERROR_CORR_LEVELS[$errorResistance].fullName;
@@ -19,7 +19,7 @@
       margin: 0,
       scale: 7,
       errorCorrectionLevel: errorCorrectionLevel as QRCodeErrorCorrectionLevel,
-      color: { dark: '#2b2a2a', light: '#ffffff' }
+      color: { dark: $foregroundColor, light: $backgroundColor }
     };
     renderQR(canvas, url, options);
   }

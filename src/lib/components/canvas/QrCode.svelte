@@ -1,17 +1,23 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, beforeUpdate } from 'svelte';
   import { getCurrentTab, renderQR } from '$lib/utils';
+  import { foregroundColor, backgroundColor } from '$lib/stores';
 
-  onMount(async () => {
+  async function handleRenderQR() {
     const { url } = await getCurrentTab();
     const canvas = document.getElementById('canvas');
     const options = {
       margin: 0,
       scale: 7,
-      color: { dark: '#2b2a2a', light: '#ffffff' }
+      color: { dark: $foregroundColor, light: $backgroundColor }
     };
     renderQR(canvas, url, options);
-  });
+  }
+
+  onMount(async () => handleRenderQR());
+  beforeUpdate(async () => handleRenderQR());
 </script>
 
-<canvas id="canvas" />
+<div class="flex justify-center mt-10 mb-8">
+  <canvas id="canvas" />
+</div>
