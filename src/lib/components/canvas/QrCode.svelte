@@ -18,6 +18,6 @@
   beforeUpdate(async () => handleRenderQR());
 </script>
 
-<div class="flex justify-center mt-10 mb-8">
+<div class="flex justify-center">
   <canvas id="canvas" />
 </div>
